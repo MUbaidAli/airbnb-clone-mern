@@ -1,0 +1,123 @@
+<%layout("/layouts/boilerplate") %>
+<body>
+  <div class="row mt-5">
+    <div class="col-8 offset-3">
+      <h2>Listing Details:</h2>
+    </div>
+    <div class="card col-6 offset-3">
+      <img
+        src="<%=data.image%>"
+        class="card-img-top show-img"
+        alt="<%=data.title%>"
+      />
+      <div class="card-body">
+        <p class="card-text">
+          <strong> <%=data.title%></strong>
+          <br />
+          <%=data.description%>
+          <br />
+          <%=data.price.toLocaleString("en-IN")%>
+          <br />
+          <%=data.location%>
+          <br />
+          <%=data.country%>
+        </p>
+        <div class="btns d-flex">
+          <div>
+            <a href="/listings/<%=data._id%>/edit" class="btn btn-dark edit-btn"
+              >Edit</a
+            >
+          </div>
+
+          <form action="/listings/<%=data._id%>?_method=DELETE" method="POST">
+            <button class="btn btn-dark mx-3 delete-btn">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 col-6 offset-3">
+    <div class="row">
+      <h2 class=>All Reviews</h2>
+      <hr />
+
+      <%for(item of data.reviews){%>
+      <div class="card col-md-6 col-12">
+        <div class="card-body border p-3 rounded">
+          <strong class="ratingStar"><%=item.rating %>  Stars</strong>
+
+          <div><%=item.review%></div>
+          <form action="/listings/<%=data._id%>/review/<%=item._id%>?_method=DELETE" method="POST" class="my-2">
+            <button class="btn btn-sm btn-dark">Delete</button>
+          </form>
+        </div>
+
+     
+      </div>
+      <%}%>
+    </div>
+    <hr />
+    <h2>Write A Review</h2>
+    <form
+      action="/listings/<%=data._id%>/review"
+      method="POST"
+      novalidate
+      class="needs-validation"
+    >
+      <div class="input">
+        <label class="form-label" for="rating">Rating - <span class="ratingCount">1</span></label>
+        <input
+        step="1"
+          type="range"
+          class="form-range rating"
+          name="rating"
+          id="rating"
+          min="1"
+          max="5"
+        />
+      </div>
+
+      <div class="input">
+        <label for="review" class="form-label">Review</label>
+        <textarea
+          required
+          class="form-control"
+          id="review"
+          name="review"
+          rows="3"
+        ></textarea>
+        <div class="valid-feedback">Review Looks good!</div>
+        <div class="invalid-feedback">Please Write A Review.</div>
+      </div>
+
+      <button class="my-4 btn btn-primary">Add Review</button>
+    </form>
+  </div>
+
+  <script>
+
+// rating , reviewCount
+// console.log(data.reviews)
+
+let reviewCountNum = 1;
+
+const ratingInput = document.querySelector(".rating");
+const ratingCount = document.querySelector(".ratingCount")
+const ratingStar = document.querySelector(".ratingStar")
+
+
+ratingInput.value = 1;
+// console.log(ratingInput.value)
+
+
+
+
+ratingInput.addEventListener("change" , (e)=>{
+reviewCountNum = e.target.value
+ratingCount.textContent = reviewCountNum;
+})  
+
+
+
+  </script>
+</body>

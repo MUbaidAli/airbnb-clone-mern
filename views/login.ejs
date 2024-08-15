@@ -1,0 +1,38 @@
+<%layout("/layouts/boilerplate") %>
+<body>
+  <div class="row py-4">
+    <div class="col-8 offset-2">
+      <h1>Create A New Listing</h1>
+      <form action="/login" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="email" class="form-label"> Username: </label>
+          <input
+            required
+            type="username"
+            name="username"
+            placeholder="Enter username"
+            class="form-control"
+            id="username"
+          />
+          <div class="valid-feedback">username Looks Good.</div>
+          <div class="invalid-feedback">username Is Required.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label"> Password: </label>
+          <input
+            required
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            class="form-control"
+            id="password"
+          />
+          <div class="valid-feedback">Password Looks Good.</div>
+          <div class="invalid-feedback">Password Is Required.</div>
+        </div>
+
+        <button class="btn btn-dark primary-btn">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
